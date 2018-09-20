@@ -360,6 +360,8 @@ You should have received a copy of the GNU General Public License along with Was
 
 @license GPL-3.0 https://www.gnu.org/licenses/gpl.html
 
+![Funken logo](https://github.com/astefas/Funken/blob/master/material/DDU-logo_BLACK_RGB.png)
+
 Significant parts of Funken have been developed by Alexander Stefas as part of research on democratizing tools at [DDU Digital Design Unit - Prof. Oliver Tessmann - Technische Universität Darmstadt](http://www.dg.architektur.tu-darmstadt.de/dg/startseite_3/index.de.jsp).
 
 ## References
