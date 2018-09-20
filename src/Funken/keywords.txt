@@ -1,0 +1,13 @@
+Funken	KEYWORD1
+listenTo	KEYWORD2
+stopListeningTo	KEYWORD2
+begin	KEYWORD2
+hark	KEYWORD2
+process	KEYWORD2
+respond	KEYWORD2
+funkenUnhandledSerialInput	KEYWORD2
+funkenVerboseOutput	KEYWORD2
+inputBuffer KEYWORD3
+verbose KEYWORD3
+unhandled KEYWORD3
+verbosed KEYWORD3s
