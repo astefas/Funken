@@ -169,16 +169,6 @@ void startAnimation(char *c) {
   char *blue = fnk.getArgument(c);
 
   /*
-    the first argument
-  */
-  char *firstArgument = fnk.getArgument(c);
-
-  char *red = fnk.getArgument(c);
-  char *green = fnk.getArgument(c);
-  char *blue = fnk.getArgument(c);
-
-
-  /*
     cast your argument to whatever type you need. in our case integer / int
   */
   int times = atoi(firstArgument);
