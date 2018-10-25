@@ -82,6 +82,7 @@ void Funken::begin(long baudrate, byte v, byte ID){
 */
 void Funken::process(String str){
 		//making char arrays the Arduino way and avoiding to include string.h
+		//maybe more elegant solution?
 	  str.toCharArray(stringInputBuffer, BUFFER_SIZE);
 
 		/*
@@ -209,7 +210,7 @@ void Funken::respond(char *c, long value){
 
 /*
   protected
-	Funken::respond(char *c, byte value)
+	Funken::respond(char	 *c, byte value)
 
   @desc overloaded method for writing different responses with different datatypes. writes directly to the serialport
 

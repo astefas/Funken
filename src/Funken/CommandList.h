@@ -30,7 +30,7 @@
 
 #include "SeriaLine.h"
 
-//max 64 on an arduino uno
+//max 64 byte input buffer on an arduino uno
 #define COMMAND_SIZE 32
 
 class CommandList : public SeriaLine {
