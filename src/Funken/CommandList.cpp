@@ -166,12 +166,14 @@ void CommandList::process(char *buff){
 	char *token = strtok_r(lastInputBuffer, " ", &prev);
 
 	boolean isCB = false;
+
 	for(int i=0; i < numOfCallbacks; i++){
 		if(strcmp(token, callbacks[i].com) == 0){
-			if(verbose) verboseCB(buff);
+      if(verbose) verboseCB(buff);
 
-			(*callbacks[i].callback)(buff);
-			isCB = true;
+      (*callbacks[i].callback)(buff);
+      isCB = true;
+
 			break;
 		}
 	}
