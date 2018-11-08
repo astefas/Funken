@@ -32,7 +32,7 @@
 
 /*
   Constructor of class CommandList
-  
+
   @desc The constructor of SeriaLine that searches incoming bytes for delimiters
 
   @def nl(newline) delimiter by default set to \n
