@@ -10,6 +10,7 @@ void setup() {
 
   FunkenSetupImplementEssentials();
   FunkenSetupImplementBasicArduino();
+  FunkenSetupImplementArduinoServo();
 }
 
 void loop() {
