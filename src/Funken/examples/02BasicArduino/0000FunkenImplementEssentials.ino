@@ -9,8 +9,8 @@
 }
 
 void funkenSetID(char *c) {
-  char *token = strtok_r(c, " ", &p);
-  char *value = strtok_r(NULL, " ", &p);
+  char *token = fnk.getToken(c);
+  char *value = fnk.getArgument(c);
 
   int valueint = atoi(value);
   
@@ -18,7 +18,7 @@ void funkenSetID(char *c) {
 }
 
 void funkenGetID(char *c) {
-  char *token = strtok_r(c, " ", &p);
+  char *token = fnk.getToken(c);
 
   fnk.respond(token, fnk.id); 
 }
@@ -27,7 +27,7 @@ void funkenGetID(char *c) {
  * TYPICAL: COMANDLIST [NO ATTRIBUTES]
  */
 void funkenListComands(char *c) {
-  char *token = strtok_r(c, " ", &p);
+  char *token = fnk.getToken(c);
 
   String commandList = "";
   boolean startHasBeenTokenized = false;
@@ -49,8 +49,8 @@ void funkenListComands(char *c) {
  * TYPICAL: V 1 or V [1 or 0]
  */
 void funkenVerbose(char *c) {
-  char *token = strtok_r(c, " ", &p);
-  char *value = strtok_r(NULL, " ", &p);
+  char *token = fnk.getToken(c);
+  char *value = fnk.getArgument(c);
 
   int valueint = atoi(value);
   fnk.verbose = valueint;

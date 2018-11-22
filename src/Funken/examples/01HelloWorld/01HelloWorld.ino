@@ -13,7 +13,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
 
   fnk.begin(57600,1,1);
-x
+
   fnk.listenTo("BLINK", funkenBlink);
 
   fnk.verbosed(funkenVerboseOutput);

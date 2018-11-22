@@ -24,7 +24,7 @@ void funkenPinMode(char *c) {
    TYPICAL: DR 13 or DR [pin]
 */
 void funkenDigitalRead(char *c) {
-  char *token = fnk.getArgument(c);
+  char *token = fnk.getToken(c);
   char *pin = fnk.getArgument(c);
 
   int pinint = atoi(pin);
@@ -42,7 +42,7 @@ void funkenDigitalRead(char *c) {
    TYPICAL: DW 9 1 or DW [pin] [0 or 1]
 */
 void funkenDigitalWrite(char *c) {
-  char *token = fnk.getArgument(c);
+  char *token = fnk.getToken(c);
   char *pin = fnk.getArgument(c);
   char *state = fnk.getArgument(c);
 
@@ -57,7 +57,7 @@ void funkenDigitalWrite(char *c) {
    TYPICAL: AW 9 100 or AW [pin] [0 or 255]
 */
 void funkenAnalogWrite(char *c) {
-  char *token = fnk.getArgument(c);
+  char *token = fnk.getToken(c);
   char *pin = fnk.getArgument(c);
   char *value = fnk.getArgument(c);
 
@@ -72,7 +72,7 @@ void funkenAnalogWrite(char *c) {
    TYPICAL: AR A0 or AR [A0 to A6]
 */
 void funkenAnalogRead(char *c) {
-  char *token = fnk.getArgument(c);
+  char *token = fnk.getToken(c);
   char *pin = fnk.getArgument(c);
 
   int pinint = atoi(pin);
