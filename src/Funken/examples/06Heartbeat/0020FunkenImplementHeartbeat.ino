@@ -12,8 +12,8 @@ void FunkenSetupImplementArduinoHeartbeat() {
  * TYPICAL: STAHB [timeout]
  */
 void startHeartbeat(char *c){
-  char *token = strtok_r(c, " ", &p);
-  char *del = strtok_r(NULL, " ", &p);
+  char *token = fnk.getToken(c);
+  char *del = fnk.getArgument(c);
 
   int timeout = atoi(del);
 
