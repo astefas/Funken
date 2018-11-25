@@ -1,11 +1,15 @@
+// ???
 #define STEP_DELAY_SHOW 100
+
+// A4988 BASE PINS
 #define STEP_PIN 5
 #define DIR_PIN 6
 #define ENABLE_PIN 4
 
-#define M0 7
-#define M1 8
-#define M2 9
+// A4988 STEPSTICK MICROSTEPPING PINS
+#define MS1 7
+#define MS2 8
+#define MS3 9
 
 unsigned long tdelta = 0;
 int rpm = 60;
@@ -18,6 +22,7 @@ long stepToGo = 0;
 boolean isForward = true;
 boolean isContinuous = false;
 
+
 void FunkenSetupImplementStepstick() {
   // SETUP PINS FOR THE STEPSTICK DRIVER
   pinMode(STEP_PIN, OUTPUT);
@@ -25,9 +30,9 @@ void FunkenSetupImplementStepstick() {
   pinMode(DIR_PIN, OUTPUT);
   digitalWrite(DIR_PIN, HIGH);
 
-  pinMode(M0, OUTPUT);
-  pinMode(M1, OUTPUT);
-  pinMode(M2, OUTPUT);
+  pinMode(MS1, OUTPUT);
+  pinMode(MS2, OUTPUT);
+  pinMode(MS3, OUTPUT);
 
   //digitalWrite(M0, LOW);
   //digitalWrite(M1, LOW);
@@ -37,28 +42,43 @@ void FunkenSetupImplementStepstick() {
   fnk.listenTo("ENABLE", enableEx);
   fnk.listenTo("DISABLE", disableEx);
   fnk.listenTo("GOREL", goRelative);
-  fnk.listenTo("GOABS", goAbsolute); // not implemented
+  fnk.listenTo("GOABS", goAbsolute);
   fnk.listenTo("SETRPM", setRPM);
   fnk.listenTo("CONTROT", continuousRotation);
+  fnk.listenTo("MICROSTEP", setMicroStepMode); // not implemented
 
   // COMPUTE MICROSECONDS DELAY BETWEEN STEPS
-  steppingDelay = int(1000000/(stepsPerRev*(rpm/60.0)));
+  steppingDelay = int(1000000 / (stepsPerRev * (rpm / 60.0)));
 }
 
 /*
-   TYPICAL: CONTROT 1 or CONTROT [-1 or 1]
+   TYPICAL: MICROSTEP 0 or MICROSTEP [0(full) or 1(half) or 2(quarter) or 3(eighth) or 4(sixteenth)]
+*/
+void setMicroStepMode(char *c) {
+  char *token = fnk.getToken(c);
+  char *val = fnk.getArgument(c);
+}
+
+/*
+   TYPICAL: CONTROT 1 or CONTROT [-1(backward) or 0(stop) or 1(forward)]
 */
 void continuousRotation(char *c) {
   char *token = fnk.getToken(c);
   char *val = fnk.getArgument(c);
 
   int dir = atoi(val);
-  if (dir >= 0) isForward = true;
-  else isForward = false;
-
-  isContinuous = true;
+  if (dir == 0) {
+    isContinuous = false;
+    stepToGo = currentStep;
+  } else {
+    if (dir >= 0) {
+      isForward = true;
+    } else {
+      isForward = false;
+    }
+    isContinuous = true;
+  }
 }
-
 
 /*
    TYPICAL: SETRPM 60 or SETRPM [int]
@@ -68,13 +88,21 @@ void setRPM(char *c) {
   char *val = fnk.getArgument(c);
 
   rpm = atoi(val);
-  steppingDelay = int(1000000/(stepsPerRev*(rpm/60.0)));
+  steppingDelay = int(1000000 / (stepsPerRev * (rpm / 60.0)));
 }
 
-
+/*
+   TYPICAL: GOABS 90 or GOABS [int]
+*/
 void goAbsolute(char *c) {
   char *token = fnk.getToken(c);
   char *val = fnk.getArgument(c);
+
+  int degree = atoi(val);
+  long steps = (stepsPerRev * degree) / 360;
+  stepToGo = steps;
+
+  isContinuous = false;
 }
 
 /*
@@ -86,14 +114,13 @@ void goRelative(char *c) {
 
   int degree = atoi(val);
   long steps = (stepsPerRev * degree) / 360;
-  stepToGo += steps;
+  stepToGo = currentStep + steps;
 
   isContinuous = false;
 }
 
-
 /*
-   TYPICAL: ENABLE
+   TYPICAL: ENABLE [NO ATTRIBUTES]
 */
 void enableEx(char *c) {
   char *token = fnk.getToken(c);
@@ -102,7 +129,7 @@ void enableEx(char *c) {
 }
 
 /*
-   TYPICAL: DISABLE
+   TYPICAL: DISABLE [NO ATTRIBUTES]
 */
 void disableEx(char *c) {
   char *token = fnk.getToken(c);
@@ -124,16 +151,15 @@ void step(long stepDelay) {
   digitalWrite(STEP_PIN, HIGH);
   delayMicroseconds(stepDelay);
   digitalWrite(STEP_PIN, LOW);
-  //delayMicroseconds(stepDelay);
 
   //////////////////////////////////////////////////////// WHAT IS THIS?!?!
   unsigned long dt = micros() - tdelta;
   if (dt < STEP_DELAY_SHOW) {
     delayMicroseconds(STEP_DELAY_SHOW - dt);
   }
-
   tdelta = micros();
-
+  ////////////////////////////////////////////////////////
+  
   if (isForward) currentStep += 1;
   else currentStep -= 1;
 }

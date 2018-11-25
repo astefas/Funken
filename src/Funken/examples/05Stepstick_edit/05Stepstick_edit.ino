@@ -16,5 +16,4 @@ void setup() {
 void loop() {
   fnk.hark();
   stepping();
-  delay(25);
 }
