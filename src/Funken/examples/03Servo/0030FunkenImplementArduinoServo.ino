@@ -17,26 +17,10 @@ void FunkenSetupImplementArduinoServo() {
   fnk.listenTo("SRV", funkenGoServo);
 }
 
-void writeServo(int servNum, int angle) {
-  angleToGo = angle;
-
-  switch(servNum){
-    case 2:
-      fnkservo02.write(angleToGo);  
-    break;
-
-    case 3:
-       fnkservo03.write(angleToGo);  
-    break;
-
-    default:
-       fnkservo01.write(angleToGo);  
-  }
-}
 /*
    THE FOLLOWING IS NOT A BEST PRACTICE IMPLEMENTATION DUE TO THE FACT THAT OUR SERVOS WERE SHIT
 
-   TYPICAL: SRV [0 to 180]
+   TYPICAL: SRV 1 90 or SRV [0 to 2] [0 to 180]
 */
 void funkenGoServo(char *c) {
   char *token = fnk.getToken(c);
@@ -49,6 +33,9 @@ void funkenGoServo(char *c) {
   writeServo(intServObjNum, servoangle);
 }
 
+/*
+   TYPICAL: ATTACHSRV 1 9 90 or ATTACHSRV [0 to 2] [pin] [0 to 180]
+*/
 void funkenAttachServo(char *c) {
   char *token = fnk.getToken(c);
   char *num = fnk.getArgument(c);
@@ -83,6 +70,9 @@ void funkenAttachServo(char *c) {
   }
 }
 
+/*
+   TYPICAL: DETACHSRV 1 or DETACHSRV [0 to 2]
+*/
 void funkenDetachServo(char *c) {
   char *token = fnk.getToken(c);
   char *num = fnk.getArgument(c);
@@ -100,5 +90,23 @@ void funkenDetachServo(char *c) {
 
     default:
       if(fnkservo01.attached()) fnkservo01.detach();
+  }
+}
+
+
+void writeServo(int servNum, int angle) {
+  angleToGo = angle;
+
+  switch(servNum){
+    case 2:
+      fnkservo02.write(angleToGo);  
+    break;
+
+    case 3:
+       fnkservo03.write(angleToGo);  
+    break;
+
+    default:
+       fnkservo01.write(angleToGo);  
   }
 }
