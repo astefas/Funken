@@ -12,7 +12,7 @@ void setup() {
   FunkenSetupImplementBasicArduino();
   FunkenSetupImplementArduinoHeartbeat();
 
-  fnk.process("STAHB 5");
+  //fnk.process("STAHB 10");
 }
 
 void loop() {
@@ -22,4 +22,3 @@ void loop() {
 
 void sendHeartbeat(){
   fnk.respond("HB", String(millis()));
-}
