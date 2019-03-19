@@ -22,3 +22,4 @@ void loop() {
 
 void sendHeartbeat(){
   fnk.respond("HB", String(millis()));
+}
