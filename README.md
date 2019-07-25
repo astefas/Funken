@@ -333,7 +333,7 @@ We will be posting links to tutorials here. Please check back later...
 ## Serialhosts for Funken
 * [GhFunken](https://github.com/ar0551/GhFunken) (Implementation for Funken Host in Rhino/Grasshopper3D) by [Andrea Rossi](https://github.com/ar0551)
 * [PyFunken](https://github.com/ar0551/PyFunken) (Implementation for Funken Host in Python) by [Andrea Rossi](https://github.com/ar0551)
-* FunkenJS (Implementation for Funken Host in NodeJS) by [Alexander Stefas](https://github.com/astefas)
+* [FunkenJS](https://github.com/astefas/FunkenJS) (Implementation for Funken Host in NodeJS) by [Alexander Stefas](https://github.com/astefas)
 
 As mentioned before, there could be litterally implementations for hosts in any programming language or - when thinking about plugin development - any software that is able to open a Serialport in order to start communication with your arduino. If you have written one, please feel free to get in contact in order to be part of the list above.
 
