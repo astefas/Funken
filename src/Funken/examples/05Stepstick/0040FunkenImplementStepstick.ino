@@ -29,6 +29,8 @@ void FunkenSetupImplementStepstick() {
   digitalWrite(STEP_PIN, LOW);
   pinMode(DIR_PIN, OUTPUT);
   digitalWrite(DIR_PIN, HIGH);
+  pinMode(ENABLE_PIN, OUTPUT);
+  digitalWrite(ENABLE_PIN, LOW);
 
   pinMode(MS1, OUTPUT);
   pinMode(MS2, OUTPUT);
